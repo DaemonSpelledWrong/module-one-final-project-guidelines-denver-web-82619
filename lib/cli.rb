@@ -102,10 +102,7 @@ attr_reader :prompt, :box
 
   def player_turn(player)
     spacing
-    puts 'What attack would you like to use?'
-    spacing
-    puts player.attacks
-    move_choice = gets.chomp.downcase
+    move_choice = prompt.select('Which attack will you use!?', player.attacks).downcase
     PokeAtt.damage_value(move_choice)
   end
 

@@ -5,6 +5,8 @@ require 'sinatra/activerecord'
 require 'require_all'
 require 'pry'
 require 'poke-api-v2'
+require 'tty-prompt'
+require 'tty-box'
 
 ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',

@@ -10,7 +10,7 @@ attr_reader :prompt, :box
   def main_menu
     box = TTY::Box.frame(
       width: 272,
-      height: 30,
+      height: 20,
       align: :center,
       padding: 3
     ) do
@@ -30,14 +30,13 @@ attr_reader :prompt, :box
                                                             '
     end
     print box
-    puts 'What would you like to do?'
     spacing
-    puts " 1.) New Game\n 2.) Exit"
+    player_choice = prompt.select('What would you like to do?', %w[Play Exit]).downcase
     spacing
-    player_choice = gets.chomp.downcase
-    if player_choice == 'new game' || player_choice == '1'
+    if player_choice == 'play'
+      system('clear')
       start
-    elsif player_choice == 'exit' || player_choice == '2'
+    elsif player_choice == 'exit'
       exit
     else
       puts 'That was an invalid choice! Please choose again.'

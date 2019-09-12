@@ -2,82 +2,43 @@
 
 # class CLI
 class Cli
-attr_reader :prompt, :box
+  attr_reader :prompt, :box
   def initialize
     @prompt = TTY::Prompt.new
   end
 
   def main_menu
-    box = TTY::Box.frame(
-      width: 272,
-      height: 20,
-      align: :center,
-      padding: 3
-    ) do
-      '
-       _______            __                  ________  __            __          __     __ 
-      /       \          /  |                /        |/  |          /  |        /  |   /  |
-      $$$$$$$  | ______  $$ |   __   ______  $$$$$$$$/ $$/   ______  $$ |____   _$$ |_  $$ |
-      $$ |__$$ |/      \ $$ |  /  | /      \ $$ |__    /  | /      \ $$      \ / $$   | $$ |
-      $$    $$//$$$$$$  |$$ |_/$$/ /$$$$$$  |$$    |   $$ |/$$$$$$  |$$$$$$$  |$$$$$$/  $$ |
-      $$$$$$$/ $$ |  $$ |$$   $$<  $$    $$ |$$$$$/    $$ |$$ |  $$ |$$ |  $$ |  $$ | __$$/ 
-      $$ |     $$ \__$$ |$$$$$$  \ $$$$$$$$/ $$ |      $$ |$$ \__$$ |$$ |  $$ |  $$ |/  |__ 
-      $$ |     $$    $$/ $$ | $$  |$$       |$$ |      $$ |$$    $$ |$$ |  $$ |  $$  $$//  |
-      $$/       $$$$$$/  $$/   $$/  $$$$$$$/ $$/       $$/  $$$$$$$ |$$/   $$/    $$$$/ $$/ 
-                                                           /  \__$$ |                       
-                                                           $$    $$/                        
-                                                            $$$$$$/                         
-                                                            '
-    end
-    print box
+    clear
+    game_title
     spacing
-    player_choice = prompt.select('What would you like to do?', %w[Play Exit]).downcase
+    player_choice = prompt.select('What would you like to do?', %w[Play Exit])
     spacing
-    if player_choice == 'play'
-      clear
-      start
-    elsif player_choice == 'exit'
-      exit
-    else
-      puts 'That was an invalid choice! Please choose again.'
-      main_menu
-    end
+    player_choice == 'Play' ? clear && start : exit
   end
 
   def start
     spacing
-    poke_choice = prompt.select('Which pokemon do you prefer?', %w[Abra Pikachu]).downcase
+    poke_choice = prompt.select('Which pokemon do you prefer?', %w[Abra Pikachu])
 
-    if poke_choice == 'abra'
+    if poke_choice == 'Abra'
       player = Pokemon.all[0]
-      clear
-      location(player)
-    elsif poke_choice =='pikachu'
-     player = Pokemon.all[1]
-     clear
-      location(player)
     else
-      clear
-      puts 'Not a valid choice'
-      start
+      player = Pokemon.all[1]
     end
+    clear
+    location(player)
   end
 
   def location(player)
     spacing
     clear
-    location_choice = prompt.select('Which location would you like to challenge?', %w[Volcano Quit]).downcase
-    if location_choice == 'volcano'
+    location_choice = prompt.select('Which location would you like to challenge?', %w[Volcano Quit])
+    if location_choice == 'Volcano'
       clear
       volcano_battle(player)
-    elsif location_choice == 'quit'
+    elsif location_choice == 'Quit'
       exit
     end
-    # else
-    #   clear
-    #   puts 'Not a valid location! Choose again.'
-    #   location(player)
-    # end
   end
 
   def volcano_battle(player)
@@ -127,5 +88,36 @@ attr_reader :prompt, :box
 
   def clear
     system('clear')
+  end
+
+  def game_title
+    box = TTY::Box.frame(
+      width: 272,
+      height: 20,
+      align: :center,
+      style: {
+        fg: :yellow,
+        bg: :black,
+        border: {
+          bg: :yellow
+        }
+      },
+      padding: 3
+    ) do
+      '
+       _______            __                  ________  __            __          __     __ 
+      /       \          /  |                /        |/  |          /  |        /  |   /  |
+      $$$$$$$  | ______  $$ |   __   ______  $$$$$$$$/ $$/   ______  $$ |____   _$$ |_  $$ |
+      $$ |__$$ |/      \ $$ |  /  | /      \ $$ |__    /  | /      \ $$      \ / $$   | $$ |
+      $$    $$//$$$$$$  |$$ |_/$$/ /$$$$$$  |$$    |   $$ |/$$$$$$  |$$$$$$$  |$$$$$$/  $$ |
+      $$$$$$$/ $$ |  $$ |$$   $$<  $$    $$ |$$$$$/    $$ |$$ |  $$ |$$ |  $$ |  $$ | __$$/ 
+      $$ |     $$ \__$$ |$$$$$$  \ $$$$$$$$/ $$ |      $$ |$$ \__$$ |$$ |  $$ |  $$ |/  |__ 
+      $$ |     $$    $$/ $$ | $$  |$$       |$$ |      $$ |$$    $$ |$$ |  $$ |  $$  $$//  |
+      $$/       $$$$$$/  $$/   $$/  $$$$$$$/ $$/       $$/  $$$$$$$ |$$/   $$/    $$$$/ $$/ 
+                                                           /  \__$$ |                       
+                                                           $$    $$/                        
+                                                            $$$$$$/                         '
+    end
+    print box
   end
 end

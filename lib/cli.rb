@@ -34,7 +34,7 @@ attr_reader :prompt, :box
     player_choice = prompt.select('What would you like to do?', %w[Play Exit]).downcase
     spacing
     if player_choice == 'play'
-      system('clear')
+      clear
       start
     elsif player_choice == 'exit'
       exit
@@ -46,19 +46,18 @@ attr_reader :prompt, :box
 
   def start
     spacing
-    puts 'Which pokemon do you prefer?'
-    spacing
-    puts " 1.) Abra\n 2.) Pikachu"
-    spacing
-    poke_choice = gets.chomp.downcase
-    # Use include? enumerable to check if it actually exists in the api
+    poke_choice = prompt.select('Which pokemon do you prefer?', %w[Abra Pikachu]).downcase
+
     if poke_choice == 'abra'
       player = Pokemon.all[0]
+      clear
       location(player)
     elsif poke_choice =='pikachu'
      player = Pokemon.all[1]
+     clear
       location(player)
     else
+      clear
       puts 'Not a valid choice'
       start
     end
@@ -66,20 +65,16 @@ attr_reader :prompt, :box
 
   def location(player)
     spacing
-    puts 'Which location would you like to challenge?'
-    spacing
-    puts " - Volcano\n - Pond"
-    location_choice = gets.chomp.downcase
+    location_choice = prompt.select('Which location would you like to challenge?', %w[Volcano]).downcase
     if location_choice == 'volcano'
-      puts 'hot!'
+      clear
       volcano_battle(player)
-    elsif location_choice == 'pond'
-      puts 'wet!'
-      pond_battle(player)
-    else
-      puts 'Not a valid location! Choose again.'
-      location(player)
     end
+    # else
+    #   clear
+    #   puts 'Not a valid location! Choose again.'
+    #   location(player)
+    # end
   end
 
   def volcano_battle(player)
@@ -108,6 +103,7 @@ attr_reader :prompt, :box
   def player_turn(player)
     spacing
     puts 'What attack would you like to use?'
+    spacing
     puts player.attacks
     move_choice = gets.chomp.downcase
     PokeAtt.damage_value(move_choice)
@@ -117,6 +113,7 @@ attr_reader :prompt, :box
     spacing
     move_choice = enemy.enemy_attack.sample.downcase
     puts "The enemy used #{move_choice}!"
+    spacing
     PokeAtt.damage_value(move_choice)
   end
 
@@ -126,5 +123,9 @@ attr_reader :prompt, :box
     puts ' '
     puts ' '
     puts ' '
+  end
+
+  def clear
+    system('clear')
   end
 end

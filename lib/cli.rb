@@ -48,9 +48,9 @@ class Cli
     if location_choice == 'volcano'
       puts 'hot!'
       volcano_battle(player)
-    # elsif location_choice == 'pond'
-    #   puts 'wet!'
-    #   pond_battle(player)
+    elsif location_choice == 'pond'
+      puts 'wet!'
+      pond_battle(player)
     else
       puts 'Not a valid location! Choose again.'
       location(player)

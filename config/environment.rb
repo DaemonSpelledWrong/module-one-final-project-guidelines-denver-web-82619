@@ -3,6 +3,7 @@
 require 'bundler'
 require 'sinatra/activerecord'
 require 'require_all'
+require 'rest-client'
 require 'pry'
 require 'poke-api-v2'
 require 'tty-prompt'

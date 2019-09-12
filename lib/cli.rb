@@ -18,12 +18,10 @@ class Cli
 
   def start
     spacing
-    poke_choice = prompt.select('Which pokemon do you prefer?', %w[Abra Pikachu])
+    poke_choice = prompt.select('Which pokemon do you prefer?', Pokemon.all.map(&:name))
 
-    if poke_choice == 'Abra'
-      player = Pokemon.all[0]
-    else
-      player = Pokemon.all[1]
+    player = Pokemon.all.select do |pokemon|
+      pokemon.name = poke_choice
     end
     clear
     location(player)
@@ -32,22 +30,17 @@ class Cli
   def location(player)
     spacing
     clear
-    location_choice = prompt.select('Which location would you like to challenge?', %w[Volcano Quit])
-    if location_choice == 'Volcano'
-      clear
-      volcano_battle(player)
-    elsif location_choice == 'Quit'
+    location_choice = prompt.select('Which location would you like to challenge?', %w[Deathly_Volcano Battle_Stadium Pokemon_League Quit])
+    if location_choice == 'Quit'
       exit
+    else
+      battle(player)
     end
   end
 
-  def volcano_battle(player)
+  def battle(player)
     enemy = Pokemon.all.sample
-    battle(player, enemy)
-  end
-
-  def battle(player, enemy)
-    player_health = player.health
+    player_health = player[0].health
     enemy_health = enemy.health
     while player_health.positive? && enemy_health.positive?
       enemy_health -= player_turn(player)
@@ -66,7 +59,7 @@ class Cli
 
   def player_turn(player)
     spacing
-    move_choice = prompt.select('Which attack will you use!?', player.attacks).downcase
+    move_choice = prompt.select('Which attack will you use!?', player[0].attacks).downcase
     PokeAtt.damage_value(move_choice)
   end
 

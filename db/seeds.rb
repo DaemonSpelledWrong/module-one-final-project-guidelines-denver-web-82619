@@ -2,9 +2,29 @@ PokeAtt.destroy_all
 Pokemon.destroy_all
 Attack.destroy_all
 
-abra = Pokemon.create(name: 'Abra', health: 50)
-pikachu = Pokemon.create(name: 'Pikachu', health: 55)
-confusion = Attack.create(name: 'Confusion', damage: 25)
-thundershock = Attack.create(name: 'Thundershock', damage: 20)
-new_att1 = PokeAtt.create(pokemon: abra, attack: confusion)
-new_att2 = PokeAtt.create(pokemon: pikachu, attack: thundershock)
+Pokemon.create_pokemons
+Attack.create_attacks
+
+# new_att1 = PokeAtt.create(pokemon: abra, attack: confusion)
+# new_att2 = PokeAtt.create(pokemon: pikachu, attack: thundershock)
+
+PokeAtt.create(pokemon: Pokemon.all[0], attack: Attack.all[14])
+PokeAtt.create(pokemon: Pokemon.all[1], attack: Attack.all[14])
+PokeAtt.create(pokemon: Pokemon.all[2], attack: Attack.all[14])
+PokeAtt.create(pokemon: Pokemon.all[3], attack: Attack.all[6])
+PokeAtt.create(pokemon: Pokemon.all[4], attack: Attack.all[6])
+PokeAtt.create(pokemon: Pokemon.all[5], attack: Attack.all[6])
+PokeAtt.create(pokemon: Pokemon.all[6], attack: Attack.all[7])
+PokeAtt.create(pokemon: Pokemon.all[7], attack: Attack.all[7])
+PokeAtt.create(pokemon: Pokemon.all[8], attack: Attack.all[7])
+PokeAtt.create(pokemon: Pokemon.all[9], attack: Attack.all[19])
+PokeAtt.create(pokemon: Pokemon.all[10], attack: Attack.all[9])
+PokeAtt.create(pokemon: Pokemon.all[11], attack: Attack.all[15])
+PokeAtt.create(pokemon: Pokemon.all[12], attack: Attack.all[19])
+PokeAtt.create(pokemon: Pokemon.all[13], attack: Attack.all[9])
+PokeAtt.create(pokemon: Pokemon.all[14], attack: Attack.all[10])
+PokeAtt.create(pokemon: Pokemon.all[15], attack: Attack.all[15])
+PokeAtt.create(pokemon: Pokemon.all[16], attack: Attack.all[16])
+PokeAtt.create(pokemon: Pokemon.all[17], attack: Attack.all[17])
+PokeAtt.create(pokemon: Pokemon.all[18], attack: Attack.all[9])
+PokeAtt.create(pokemon: Pokemon.all[19], attack: Attack.all[11])

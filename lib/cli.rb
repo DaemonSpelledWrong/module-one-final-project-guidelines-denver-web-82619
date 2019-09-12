@@ -65,6 +65,7 @@ attr_reader :prompt, :box
 
   def location(player)
     spacing
+    clear
     location_choice = prompt.select('Which location would you like to challenge?', %w[Volcano Quit]).downcase
     if location_choice == 'volcano'
       clear

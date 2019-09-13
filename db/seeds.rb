@@ -1,12 +1,11 @@
+# frozen_string_literal: true
+
 PokeAtt.destroy_all
 Pokemon.destroy_all
 Attack.destroy_all
 
 Pokemon.create_pokemons
 Attack.create_attacks
-
-# new_att1 = PokeAtt.create(pokemon: abra, attack: confusion)
-# new_att2 = PokeAtt.create(pokemon: pikachu, attack: thundershock)
 
 PokeAtt.create(pokemon: Pokemon.all[0], attack: Attack.all[14])
 PokeAtt.create(pokemon: Pokemon.all[1], attack: Attack.all[14])

@@ -85,7 +85,7 @@ class Cli
 
   def game_title
     box = TTY::Box.frame(
-      width: 272,
+      width: 150,
       height: 20,
       align: :center,
       style: {

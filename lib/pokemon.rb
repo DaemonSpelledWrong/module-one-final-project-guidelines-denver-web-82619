@@ -11,7 +11,7 @@ class Pokemon < ActiveRecord::Base
     end
     value.map do |pokeatt|
       pokeatt.attack.name
-    end[0]
+    end
   end
 
   def enemy_attack
